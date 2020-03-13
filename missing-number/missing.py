@@ -12,9 +12,11 @@ def missing_number(nums, max_num):
     
     """
     nums.sort()
-    for num in range(1, max_num+1):
-        if num not in nums:
-            return num
+    check = 1
+    for num in nums:
+        if num != check:
+            return check
+        check += 1
 
 if __name__ == '__main__':
     import doctest
