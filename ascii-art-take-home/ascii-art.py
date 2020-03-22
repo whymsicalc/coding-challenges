@@ -3,12 +3,19 @@
         """Create instance of a Canvas."""
 
         self.canvas = []
+        self.shapes = []
         for i in range(10):
             self.canvas.append([' '] * 10)
 
     def print_canvas(self):
         """Print canvas with indices."""
-
+                
+        # Add rectangles to canvas
+        for shape in self.shapes:
+          for x in range(shape.start_x, shape.end_x + 1):
+            for y in range(shape.start_y, shape.end_y + 1):
+                self.canvas[x][y] = shape.fill_char
+        
         print('  0123456789')
         for i, row in enumerate(self.canvas):
             line = str(i) + ' '
@@ -18,26 +25,11 @@
 
     def add_shape(self, shape):
         """Add a shape to the canvas."""
-        # Somehow loop through each line from start_x, start_y until end_x, end_y
-        # At position update value to shape.fill_char
-        canvas[shape.start_x][start_y] = shape.fill_char
+        self.shapes.append(shape)
 
     def clear_shape(self, shape):
         """Remove a shape from the canvas."""
-        # Somehow loop through each line from start_x, start_y until end_x, end_y
-        # At position update value to ' '
-        canvas[shape.start_x][start_y] = ' '
-
-    def move_shape(self, shape, axis, num):
-        """Move a shape on the canvas."""
-        if axis = 'x':
-            shape.start_x += num
-            shape.end_x += num
-        elif axis = 'y':
-            shape.start_y += num
-            shape.end_y += num
-        clear_shape(shape)
-        add_shape(shape)
+        self.shapes.remove(shape)
 
 
 class Rectangle:
@@ -51,7 +43,14 @@ class Rectangle:
 
     def change_fill(self, char):
         """Change the fill character of the Rectangle."""
-        # Not sure what to do if shape is already on canvas?
         self.fill_char = char
-
+        
+    def move_shape(self, shape, axis, num):
+        """Update start and end point of shape."""
+        if axis = 'x':
+            shape.start_x += num
+            shape.end_x += num
+        elif axis = 'y':
+            shape.start_y += num
+            shape.end_y += num
 
